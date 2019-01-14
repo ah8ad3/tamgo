@@ -1,0 +1,2 @@
+# tamgo
+lightweight golang bundle
