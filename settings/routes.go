@@ -1,12 +1,12 @@
 package settings
 
 import "github.com/gorilla/mux"
-import "../apps/common"
+import "github.com/ah8ad3/tamgo/apps/common"
 
-func routes() (router mux.Route){
+func Routes() (router *mux.Router){
 	r := mux.NewRouter()
 
-	r.HandleFunc("/", homePage).Methods("GET")
+	r.HandleFunc("/", common.HomePage).Methods("GET")
 
 	return r
 }

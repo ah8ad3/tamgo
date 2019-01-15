@@ -11,8 +11,9 @@ lightweight golang bundle
 
 
 
-# THIS PROJECT CANT RUN YET, WAIT UNTIL NEXT UPDATE
-
-
 i create this repo in my free time so feel free to help me
 contact `ah8ad3@gmail.com`
+
+
+to run this
+`go install` and then run `./tamgo` binary file in your'e gopath bin file
