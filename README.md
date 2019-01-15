@@ -1,5 +1,9 @@
 # tamgo
 lightweight golang bundle
+- app structure in building
+- gorm orm for postgresql can use as many dbms 
+- every app has its own db and routes and models
+- .env support
 
 # TODO
 - create a bundle to fast create and deploy golang projects in backend
@@ -8,6 +12,12 @@ lightweight golang bundle
 - add travis.yml
 - add test coverage and test library
 - ...
+
+
+# NOTE
+- after create app you should first pass DB to models in server package, then create subroutes in settings/routes  and pass it to route in app this is
+how you can work offline in app, simple app common has the base pattern for app
+- i will create this section easier in future
 
 
 
