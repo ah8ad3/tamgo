@@ -2,11 +2,11 @@ package server
 
 import (
 	"fmt"
+	"github.com/ah8ad3/tamgo/apps/common"
+	"github.com/ah8ad3/tamgo/lib/auth"
 	"github.com/ah8ad3/tamgo/settings"
 	"log"
 	"net/http"
-
-	"github.com/ah8ad3/tamgo/apps/common"
 )
 
 const (
@@ -26,6 +26,7 @@ func Server() {
 
 	// need to set db to all models and apps here like this
 	common.SetDB(db)
+	auth.SetDB(db)
 
 	// run server here
 	fmt.Printf(InfoColor, "server run at localhost:8000")
