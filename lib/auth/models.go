@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"fmt"
 	"github.com/jinzhu/gorm"
 )
 
@@ -8,9 +9,9 @@ var DB *gorm.DB
 
 type User struct {
 	gorm.Model
-	username  string
-	password string
-	email string
+	Username  string
+	Password string
+	Email string
 }
 
 func (user *User) SetPassword(pass string) string {
@@ -23,4 +24,12 @@ func (user *User) ValidPassword(pass string, check string) bool {
 
 func SetDB(db *gorm.DB) {
 	DB = db
+}
+
+func CreateAuthModel() {
+	//DB.Create(&User{Username: "ahmad", Password: "ahmad", Email: "ahmad@gmail.com"})
+	if res :=DB.HasTable(&User{}); res == false {
+		fmt.Println(&User{})
+		DB.AutoMigrate(&User{})
+	}
 }

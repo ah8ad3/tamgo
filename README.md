@@ -4,6 +4,9 @@ lightweight golang bundle
 - gorm orm for postgresql can use as many dbms 
 - every app has its own db and routes and models
 - .env support
+- session support
+- simple cookie based authentication in progress
+- auth app created in separate package to manage all auth staff
 
 # TODO
 - create a bundle to fast create and deploy golang projects in backend
