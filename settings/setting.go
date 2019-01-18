@@ -19,7 +19,7 @@ func Config() (DB *gorm.DB){
 	store := sessions.NewCookieStore([]byte(os.Getenv("SECRET_KEY")))
 	store.Options = &sessions.Options{
 		Path:     "/",      // to match all requests
-		MaxAge:   3600 * 1, // 1 hour
+		MaxAge:   20 * 1, // 1 hour
 		HttpOnly: true,
 	}
 

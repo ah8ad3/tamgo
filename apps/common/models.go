@@ -14,4 +14,7 @@ type Product struct {
 
 func SetDB(db *gorm.DB) {
 	DB = db
+	if res :=DB.HasTable(&Product{}); res == false {
+		DB.AutoMigrate(&Product{})
+	}
 }

@@ -28,7 +28,6 @@ func Server() {
 	common.SetDB(db)
 	auth.SetDB(db)
 
-	auth.CreateAuthModel()
 
 	// run server here
 	fmt.Printf(InfoColor, "server run at localhost:8000")

@@ -3,6 +3,7 @@ package auth
 import (
 	"golang.org/x/crypto/bcrypt"
 	"log"
+	"net/http"
 )
 
 
@@ -36,4 +37,28 @@ func comparePasswords(hashedPwd string, plainPwd []byte) bool {
 	}
 
 	return true
+}
+
+func getAuthInterface(f interface{}) bool {
+	if f != nil {
+		if _, ok := f.(bool); ok {
+			return true
+		}
+	}
+	return false
+}
+
+func checkLogin(r *http.Request) bool {
+	ses, _ := Store.Get(r, "tamgo-auth")
+	if res := getAuthInterface(ses.Values["login"]); res {
+		return true
+	}
+	return false
+
+}
+
+func doLogin(w http.ResponseWriter, r *http.Request) {
+	ses, _ := Store.Get(r, "tamgo-auth")
+	ses.Values["login"] = true
+	_ = ses.Save(r, w)
 }
