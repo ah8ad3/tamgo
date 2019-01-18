@@ -7,6 +7,7 @@ lightweight golang bundle
 - session support
 - simple cookie based authentication in progress
 - auth app created in separate package to manage all auth staff
+- static files served
 
 # TODO
 - create a bundle to fast create and deploy golang projects in backend

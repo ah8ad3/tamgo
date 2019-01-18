@@ -5,5 +5,5 @@ import (
 )
 
 func Routes(r *mux.Router) {
-	r.HandleFunc("", commonHome).Methods("GET").Name("common:index")
+	r.HandleFunc("/", commonHome).Methods("GET").Name("common:index")
 }
