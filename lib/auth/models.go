@@ -12,13 +12,18 @@ type User struct {
 	Password string
 	Email string
 }
+// example usage of this two functions
 
-func (user *User) SetPassword(pass string) string {
+// pass := SetPassword(password)
+// bo := ValidPassword(pass, "as")
+// fmt.Println(pass, bo)
+
+func SetPassword(pass string) string {
 	return hashAndSalt([]byte(pass))
 }
 
-func (user *User) ValidPassword(pass string, check string) bool {
-	return comparePasswords(pass, []byte(check))
+func ValidPassword(hash string, pass string) bool {
+	return comparePasswords(hash, []byte(pass))
 }
 
 func SetDB(db *gorm.DB) {

@@ -3,6 +3,7 @@ package auth
 import (
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -14,12 +15,34 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		if res := checkLogin(r); res {
 			http.Redirect(w, r, "/auth/profile", http.StatusFound)
+			return
 		} else {
 			w.Header().Set("Content-Type", "text/html; charset=utf-8")
 			http.ServeFile(w, r, templateDir + "register.html")
+			return
 		}
 	}else {
-		_, _ = fmt.Fprintf(w, "post of register section")
+		_ = r.ParseForm()
+		username := strings.Join(r.Form["username"], "")
+		password := strings.Join(r.Form["password"], "")
+		email := strings.Join(r.Form["email"], "")
+
+		if username == "" || password == "" || email == "" {
+			_, _ = fmt.Fprintf(w, "input form are incomplete")
+			return
+		}
+
+		user := User{}
+		DB.Where("username = ?", username).First(&user)
+		if user.ID != 0 {
+			_, _ = fmt.Fprintf(w, "this username taken")
+			return
+		}
+
+		DB.Create(&User{Username: username, Password: SetPassword(password), Email: email})
+
+		http.Redirect(w, r, "/auth/login", http.StatusFound)
+		return
 	}
 }
 
@@ -27,20 +50,41 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	if r.Method == "GET" {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		http.ServeFile(w, r, templateDir + "login.html")
+		return
 	}else {
-		// all login staff check
-		//doLogin(w, r)
-		_, _ = fmt.Fprintf(w, "post section of login")
+		_ = r.ParseForm()
+		username := strings.Join(r.Form["username"], "")
+		password := strings.Join(r.Form["password"], "")
+
+		if username == "" || password == "" {
+			_, _ = fmt.Fprintf(w, "input form are incomplete")
+			return
+		}
+
+		user := User{}
+		DB.Where("username = ?", username).First(&user)
+
+		if user.ID == 0 || !ValidPassword(user.Password, password){
+			_, _ = fmt.Fprintf(w, "username or password wrong")
+			return
+		}
+
+		doLogin(w, r)
+
+		http.Redirect(w, r, "/auth/profile", http.StatusFound)
+		return
 	}
+}
+
+func Logout(w http.ResponseWriter, r *http.Request) {
+	doLogout(w, r)
+	http.Redirect(w, r, "/auth/login", http.StatusFound)
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	isLoggedIn(w, r)
-	_, _ = fmt.Fprintf(w, "this is secret area")
-}
-
-func isLoggedIn(w http.ResponseWriter, r *http.Request) {
 	if res := checkLogin(r); res == false {
 		http.Redirect(w, r, "/auth/login", http.StatusFound)
+		return
 	}
+	http.ServeFile(w, r, templateDir+"profile.html")
 }

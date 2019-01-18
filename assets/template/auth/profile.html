@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Profile</title>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -12,7 +12,6 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-    <link rel="stylesheet" href="/static/css/main.css">
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="shortcut icon" href="/static/img/tamgo.svg" />
 </head>
@@ -21,25 +20,10 @@
     <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/auth/register">Register</a></li>
-        <li><a class="active" href="/auth/login">Login</a></li>
-        <li><a href="/auth/profile">Profile</a></li>
+        <li><a href="/auth/login">Login</a></li>
+        <li><a class="active" href="/auth/profile">Profile</a></li>
         <li><a href="/auth/logout">Logout</a></li>
     </ul>
-
-    <div class="row">
-        <h1>Login to Tamgo account</h1>
-        <form action="/auth/login" method="post" id="register-form">
-            <div class="form-group">
-                <label for="username">Username:</label>
-                <input name="username" type="text" class="form-control" id="username">
-            </div>
-            <div class="form-group">
-                <label for="pwd">Password:</label>
-                <input name="password" type="password" class="form-control" id="pwd">
-            </div>
-            <button type="submit" class="btn btn-default">Submit</button>
-        </form>
-    </div>
 </div>
 
 </body>

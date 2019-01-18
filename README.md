@@ -5,8 +5,8 @@ lightweight golang bundle
 - every app has its own db and routes and models
 - .env support
 - session support
-- simple cookie based authentication in progress
-- auth app created in separate package to manage all auth staff
+- auth app created in separate package to manage all auth staff include login register and logout with simple session 
+authentication
 - static files served
 
 # TODO

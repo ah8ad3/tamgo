@@ -41,7 +41,7 @@ func comparePasswords(hashedPwd string, plainPwd []byte) bool {
 
 func getAuthInterface(f interface{}) bool {
 	if f != nil {
-		if _, ok := f.(bool); ok {
+		if ok, _ := f.(bool); ok {
 			return true
 		}
 	}
@@ -60,5 +60,11 @@ func checkLogin(r *http.Request) bool {
 func doLogin(w http.ResponseWriter, r *http.Request) {
 	ses, _ := Store.Get(r, "tamgo-auth")
 	ses.Values["login"] = true
+	_ = ses.Save(r, w)
+}
+
+func doLogout(w http.ResponseWriter, r *http.Request) {
+	ses, _ := Store.Get(r, "tamgo-auth")
+	ses.Values["login"] = false
 	_ = ses.Save(r, w)
 }

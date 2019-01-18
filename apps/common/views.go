@@ -6,15 +6,13 @@ import (
 	"net/http"
 )
 
+const (
+	templateDir = "assets/template/common/"
+)
+
 func HomePage(w http.ResponseWriter, r *http.Request) {
-	product := Product{Code: "12", Price: 12}
-
-	_ = product
-	// this is how we save a record to DB
-	//DB.Create(&product)
-
-	w.Header().Set("Content-Type", "application")
-	_, _ = fmt.Fprintf(w, "Hello, you've requested: %s\n", r.URL.Path)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+	http.ServeFile(w, r, templateDir + "index.html")
 }
 
 func commonHome(w http.ResponseWriter, r *http.Request) {
