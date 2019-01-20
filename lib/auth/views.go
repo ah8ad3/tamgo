@@ -12,8 +12,8 @@ const (
 
 
 func Register(w http.ResponseWriter, r *http.Request) {
+	noCache(w)
 	if r.Method == "GET" {
-		fmt.Println("register")
 		res := checkLogin(r)
 		if res == true {
 			http.Redirect(w, r, "/auth/profile", http.StatusFound)
@@ -49,6 +49,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 }
 
 func Login(w http.ResponseWriter, r *http.Request) {
+	noCache(w)
 	if r.Method == "GET" {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		http.ServeFile(w, r, templateDir + "login.html")
@@ -79,12 +80,13 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 
 func Logout(w http.ResponseWriter, r *http.Request) {
+	noCache(w)
 	doLogout(w, r)
 	http.Redirect(w, r, "/auth/login", http.StatusFound)
 }
 
 func Profile(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("profile")
+	noCache(w)
 	res := checkLogin(r)
 	if res == true {
 		http.ServeFile(w, r, templateDir+"profile.html")

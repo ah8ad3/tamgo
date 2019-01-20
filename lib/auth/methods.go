@@ -4,6 +4,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
+	"time"
 )
 
 
@@ -66,4 +67,11 @@ func doLogout(w http.ResponseWriter, r *http.Request) {
 	ses, _ := Store.Get(r, "tamgo-auth")
 	ses.Values["login"] = false
 	_ = ses.Save(r, w)
+}
+
+func noCache(w http.ResponseWriter) {
+	w.Header().Set("Cache-Control", "no-cache, private, max-age=0")
+	w.Header().Set("Expires", time.Unix(0, 0).Format(http.TimeFormat))
+	w.Header().Set("Pragma", "no-cache")
+	w.Header().Set("X-Accel-Expires", "0")
 }
