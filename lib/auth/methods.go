@@ -1,6 +1,7 @@
 package auth
 
 import (
+	jwt "github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
@@ -74,4 +75,23 @@ func noCache(w http.ResponseWriter) {
 	w.Header().Set("Expires", time.Unix(0, 0).Format(http.TimeFormat))
 	w.Header().Set("Pragma", "no-cache")
 	w.Header().Set("X-Accel-Expires", "0")
+}
+
+func createTokenString() string {
+	// Embed User information to `token`
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), &User{
+		Username: "otiai10",
+		Age:  30,
+	})
+	// token -> string. Only server knows this secret (foobar).
+	tokenstring, err := token.SignedString([]byte("foobar"))
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return tokenstring
+}
+
+
+func signJWT(w http.ResponseWriter) string {
+	return ""
 }

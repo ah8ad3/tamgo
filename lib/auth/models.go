@@ -11,6 +11,7 @@ type User struct {
 	Username  string
 	Password string
 	Email string
+	Age int16
 }
 // example usage of this two functions
 
