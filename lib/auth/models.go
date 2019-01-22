@@ -1,6 +1,7 @@
 package auth
 
 import (
+	"github.com/dgrijalva/jwt-go"
 	"github.com/jinzhu/gorm"
 )
 
@@ -11,8 +12,14 @@ type User struct {
 	Username  string
 	Password string
 	Email string
-	Age int16
 }
+
+type JWT struct {
+	user User
+	Age int
+	jwt.StandardClaims
+}
+
 // example usage of this two functions
 
 // pass := SetPassword(password)
@@ -31,5 +38,8 @@ func SetDB(db *gorm.DB) {
 	DB = db
 	if res :=DB.HasTable(&User{}); res == false {
 		DB.AutoMigrate(&User{})
+	}
+	if res :=DB.HasTable(&JWT{}); res == false {
+		DB.AutoMigrate(&JWT{})
 	}
 }

@@ -8,6 +8,7 @@ lightweight golang bundle
 - auth app created in separate package to manage all auth staff include login register and logout with simple session 
 authentication
 - static files served
+- JWT support
 
 # TODO
 - create a bundle to fast create and deploy golang projects in backend

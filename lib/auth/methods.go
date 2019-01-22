@@ -5,6 +5,7 @@ import (
 	"golang.org/x/crypto/bcrypt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -77,21 +78,17 @@ func noCache(w http.ResponseWriter) {
 	w.Header().Set("X-Accel-Expires", "0")
 }
 
-func createTokenString() string {
+func createTokenString(user User) string {
 	// Embed User information to `token`
-	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), &User{
-		Username: "otiai10",
+	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), &JWT{
+		user: user,
 		Age:  30,
 	})
+
 	// token -> string. Only server knows this secret (foobar).
-	tokenstring, err := token.SignedString([]byte("foobar"))
+	tokenstring, err := token.SignedString([]byte(os.Getenv("SECRET_KEY")))
 	if err != nil {
 		log.Fatalln(err)
 	}
 	return tokenstring
-}
-
-
-func signJWT(w http.ResponseWriter) string {
-	return ""
 }

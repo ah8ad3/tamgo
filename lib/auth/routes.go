@@ -9,4 +9,6 @@ func Routes(r *mux.Router) {
 	r.HandleFunc("/login", Login).Methods("GET", "POST").Name("auth:login")
 	r.HandleFunc("/logout", Logout).Methods("GET").Name("auth:logout")
 	r.HandleFunc("/profile", Profile).Methods("GET").Name("auth:profile")
+	r.HandleFunc("/jwt/check", CheckJwt).Methods("POST")
+	r.HandleFunc("/jwt/sign", SignJWT).Methods("POST")
 }

@@ -2,7 +2,9 @@ package auth
 
 import (
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"net/http"
+	"os"
 	"strings"
 )
 
@@ -75,6 +77,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		doLogin(w, r)
 
 		http.Redirect(w, r, "/auth/profile", http.StatusFound)
+
 		return
 	}
 }
@@ -93,5 +96,50 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 		return
 	}else {
 		http.Redirect(w, r, "/auth/login", http.StatusFound)
+	}
+}
+
+func CheckJwt(w http.ResponseWriter, r *http.Request) {
+	_ = r.ParseForm()
+	tokenstring := strings.Join(r.Form["token"], "")
+	token, _ := jwt.Parse(tokenstring, func(token *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("SECRET_KEY")), nil
+	})
+	// When using `Parse`, the result `Claims` would be a map.
+
+	// In another way, you can decode token to your struct, which needs to satisfy `jwt.StandardClaims`
+	user := JWT{}
+	token, _ = jwt.ParseWithClaims(tokenstring, &user, func(token *jwt.Token) (interface{}, error) {
+		return []byte(os.Getenv("SECRET_KEY")), nil
+	})
+	if token.Valid {
+		_, _ = fmt.Fprintf(w, "this token is right")
+		return
+	}
+	_, _ = fmt.Fprintf(w, "this token is wrong")
+	return
+}
+
+func SignJWT(w http.ResponseWriter, r *http.Request) {
+	if r.Method == "POST" {
+		_ = r.ParseForm()
+		username := strings.Join(r.Form["username"], "")
+		password := strings.Join(r.Form["password"], "")
+
+		if username == "" || password == "" {
+			_, _ = fmt.Fprintf(w, "input form are incomplete")
+			return
+		}
+
+		user := User{}
+		DB.Where("username = ?", username).First(&user)
+
+		if user.ID == 0 || !ValidPassword(user.Password, password){
+			_, _ = fmt.Fprintf(w, "username or password wrong")
+			return
+		}
+		token := createTokenString(user)
+		_, _ = fmt.Fprintf(w, token)
+		return
 	}
 }
