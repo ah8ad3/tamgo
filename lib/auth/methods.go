@@ -79,10 +79,14 @@ func noCache(w http.ResponseWriter) {
 }
 
 func createTokenString(user User) string {
+	expireToken := time.Now().Add(time.Hour * 24).Unix()
 	// Embed User information to `token`
 	token := jwt.NewWithClaims(jwt.GetSigningMethod("HS256"), &JWT{
-		user: user,
+		User: user,
 		Age:  30,
+		StandardClaims: jwt.StandardClaims{
+			ExpiresAt: expireToken,
+		},
 	})
 
 	// token -> string. Only server knows this secret (foobar).

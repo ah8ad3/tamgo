@@ -15,7 +15,7 @@ type User struct {
 }
 
 type JWT struct {
-	user User
+	User User
 	Age int
 	jwt.StandardClaims
 }
