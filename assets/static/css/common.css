@@ -31,3 +31,16 @@ li a.active {
 body{
     background-color: aliceblue;
 }
+
+.container {
+    display: flex; /* or inline-flex */
+    flex-direction: column;
+}
+
+#row1 {
+    background-color: #4CAF50;
+}
+
+#row2 {
+ background-color: blue;
+}

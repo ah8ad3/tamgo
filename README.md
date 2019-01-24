@@ -9,13 +9,13 @@ lightweight golang bundle
 authentication
 - static files served
 - JWT support
+- test are very easy in golang
 
 # TODO
 - create a bundle to fast create and deploy golang projects in backend
 - find some good environment library management like package.json
 - create bundle structure like patty
 - add travis.yml
-- add test coverage and test library
 - ...
 
 
