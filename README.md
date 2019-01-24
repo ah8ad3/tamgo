@@ -1,4 +1,6 @@
 # tamgo
+[![Build Status](https://travis-ci.org/ah8ad3/tamgo.svg?branch=master)](https://travis-ci.org/ah8ad3/tamgo)
+
 lightweight golang bundle
 - app structure in building
 - gorm orm for postgresql can use as many dbms 
@@ -15,7 +17,7 @@ authentication
 - create a bundle to fast create and deploy golang projects in backend
 - find some good environment library management like package.json
 - create bundle structure like patty
-- add travis.yml
+- working on docker
 - ...
 
 
@@ -30,5 +32,5 @@ i create this repo in my free time so feel free to help me
 contact `ah8ad3@gmail.com`
 
 
-to run this
+to run this first run `go get -t github.com/ah8ad3/tamgo` then
 `go install` and then run `./tamgo` binary file in your'e gopath bin file
