@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	// info color blue
+	// InfoColor blue
 	InfoColor    = "\033[1;34m%s\033[0m"
 	//NoticeColor  = "\033[1;36m%s\033[0m"
 	//WarningColor = "\033[1;33m%s\033[0m"
@@ -18,7 +18,7 @@ const (
 	//DebugColor   = "\033[0;36m%s\033[0m"
 )
 
-// this is all settings and config functions
+// Server is all settings and config functions
 // also serve main http server
 func Server() {
 	// load all routes here
