@@ -1,3 +1,9 @@
+//
+// Copyright (c) 2019
+// Tamgo
+//
+
+// Package server for set all settings together
 package server
 
 import (

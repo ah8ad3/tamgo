@@ -1,5 +1,7 @@
 # tamgo
 [![Build Status](https://travis-ci.org/ah8ad3/tamgo.svg?branch=master)](https://travis-ci.org/ah8ad3/tamgo)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ah8ad3/tamgo)](https://goreportcard.com/report/github.com/ah8ad3/tamgo)
+
 
 lightweight golang bundle
 - app structure in building
