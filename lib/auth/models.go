@@ -5,8 +5,10 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
+// DB is a pointer of active database pq
 var DB *gorm.DB
 
+// User model for save in database
 type User struct {
 	gorm.Model
 	Username  string
@@ -14,6 +16,7 @@ type User struct {
 	Email string
 }
 
+// JWT model for save in database
 type JWT struct {
 	User User
 	Age int
@@ -21,19 +24,18 @@ type JWT struct {
 }
 
 // example usage of this two functions
-
 // pass := SetPassword(password)
-// bo := ValidPassword(pass, "as")
-// fmt.Println(pass, bo)
-
 func SetPassword(pass string) string {
 	return hashAndSalt([]byte(pass))
 }
 
+// bo := ValidPassword(pass, "as")
+// fmt.Println(pass, bo)
 func ValidPassword(hash string, pass string) bool {
 	return comparePasswords(hash, []byte(pass))
 }
 
+// this is how you can set DB pointer to active database
 func SetDB(db *gorm.DB) {
 	DB = db
 	if res :=DB.HasTable(&User{}); res == false {

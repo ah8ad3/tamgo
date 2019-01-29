@@ -19,6 +19,7 @@ func listRoutes(r *mux.Router) {
 	})
 }
 
+// this is main routes function that connect to all apps
 func Routes() (router *mux.Router){
 	r := mux.NewRouter().StrictSlash(true)
 	r.HandleFunc("/", common.HomePage).Methods("GET").Name("index")

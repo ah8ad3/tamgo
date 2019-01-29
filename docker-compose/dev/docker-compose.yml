@@ -1,0 +1,24 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_USER=root
+      - POSTGRES_DB=tamgo
+
+  tamgo:
+    build:
+      dockerfile: Dockerfile
+      context: ../../
+    ports:
+      - "8000:8000"
+    restart: "on-failure"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_NAME=root
+      - DB_PASS=root
+      - DB_PORT=5432
+      - SECRET_KEY=lkcQD#@R$RTrevs30
