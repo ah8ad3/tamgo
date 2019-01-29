@@ -10,7 +10,7 @@ import (
 	"os"
 )
 
-// this is config function for tamgo
+// Config this is config function for tamgo
 func Config() (DB *gorm.DB){
 	err := godotenv.Load()
 	if err != nil {

@@ -13,7 +13,7 @@ const (
 )
 
 
-// register user view
+// Register user view
 func Register(w http.ResponseWriter, r *http.Request) {
 	noCache(w)
 	if r.Method == "GET" {
@@ -51,7 +51,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// create session for login
+// Login create session for login
 func Login(w http.ResponseWriter, r *http.Request) {
 	noCache(w)
 	if r.Method == "GET" {
@@ -84,14 +84,14 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// logout function for session
+// Logout function for session
 func Logout(w http.ResponseWriter, r *http.Request) {
 	noCache(w)
 	doLogout(w, r)
 	http.Redirect(w, r, "/auth/login", http.StatusFound)
 }
 
-// view for user profile an secret area
+// Profile view for user profile an secret area
 func Profile(w http.ResponseWriter, r *http.Request) {
 	noCache(w)
 	res := checkLogin(r)
@@ -103,7 +103,7 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-// Validate if token is JWT and have time
+// CheckJwt if token is JWT and have time
 func CheckJwt(w http.ResponseWriter, r *http.Request) {
 	_ = r.ParseForm()
 	tokenstring := strings.Join(r.Form["token"], "")

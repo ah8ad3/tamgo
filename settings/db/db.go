@@ -9,11 +9,11 @@ import (
 )
 
 const (
-	// yellow color for warning
+	// WarningColor yellow color for warning
 	WarningColor = "\033[1;33m%s\033[0m"
 )
 
-// connect to pq database with gorm
+// OpenDB connect to pq database with gorm
 func OpenDB() (db *gorm.DB) {
 	fmt.Println(os.Getenv("DB_HOST"))
 

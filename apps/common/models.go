@@ -7,7 +7,7 @@ import (
 // DB is pointer of active database pq
 var DB *gorm.DB
 
-// sample template of how gorm tables are
+// Product sample template of how gorm tables are
 type Product struct {
 	gorm.Model
 	Code  string

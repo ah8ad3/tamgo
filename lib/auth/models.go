@@ -23,19 +23,19 @@ type JWT struct {
 	jwt.StandardClaims
 }
 
-// example usage of this two functions
+// SetPassword example usage of this two functions
 // pass := SetPassword(password)
 func SetPassword(pass string) string {
 	return hashAndSalt([]byte(pass))
 }
 
-// bo := ValidPassword(pass, "as")
+// ValidPassword bo := ValidPassword(pass, "as")
 // fmt.Println(pass, bo)
 func ValidPassword(hash string, pass string) bool {
 	return comparePasswords(hash, []byte(pass))
 }
 
-// this is how you can set DB pointer to active database
+// SetDB this is how you can set DB pointer to active database
 func SetDB(db *gorm.DB) {
 	DB = db
 	if res :=DB.HasTable(&User{}); res == false {
