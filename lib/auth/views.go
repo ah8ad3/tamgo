@@ -58,30 +58,30 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		http.ServeFile(w, r, templateDir + "login.html")
 		return
-	}else {
-		_ = r.ParseForm()
-		username := strings.Join(r.Form["username"], "")
-		password := strings.Join(r.Form["password"], "")
+	}
+	_ = r.ParseForm()
+	username := strings.Join(r.Form["username"], "")
+	password := strings.Join(r.Form["password"], "")
 
-		if username == "" || password == "" {
-			_, _ = fmt.Fprintf(w, "input form are incomplete")
-			return
-		}
-
-		user := User{}
-		DB.Where("username = ?", username).First(&user)
-
-		if user.ID == 0 || !ValidPassword(user.Password, password){
-			_, _ = fmt.Fprintf(w, "username or password wrong")
-			return
-		}
-
-		doLogin(w, r)
-
-		http.Redirect(w, r, "/auth/profile", http.StatusFound)
-
+	if username == "" || password == "" {
+		_, _ = fmt.Fprintf(w, "input form are incomplete")
 		return
 	}
+
+	user := User{}
+	DB.Where("username = ?", username).First(&user)
+
+	if user.ID == 0 || !ValidPassword(user.Password, password){
+		_, _ = fmt.Fprintf(w, "username or password wrong")
+		return
+	}
+
+	doLogin(w, r)
+
+	http.Redirect(w, r, "/auth/profile", http.StatusFound)
+
+	return
+
 }
 
 // Logout function for session
@@ -98,9 +98,8 @@ func Profile(w http.ResponseWriter, r *http.Request) {
 	if res == true {
 		http.ServeFile(w, r, templateDir+"profile.html")
 		return
-	}else {
-		http.Redirect(w, r, "/auth/login", http.StatusFound)
 	}
+	http.Redirect(w, r, "/auth/login", http.StatusFound)
 }
 
 // CheckJwt if token is JWT and have time

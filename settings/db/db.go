@@ -3,6 +3,7 @@ package db
 import (
 	"fmt"
 	"github.com/jinzhu/gorm"
+	// postgres _ need to connect to pq
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 	"log"
 	"os"

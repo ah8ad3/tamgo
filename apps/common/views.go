@@ -10,8 +10,7 @@ const (
 	templateDir = "assets/template/common/"
 )
 
-// this is HomePage function
-// this function serve index.html file from template dir
+// this is HomePage function serve index.html file from template dir
 func HomePage(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	http.ServeFile(w, r, templateDir + "index.html")
